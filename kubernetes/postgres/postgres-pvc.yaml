@@ -13,7 +13,7 @@ spec:
     requests:
       storage: 10Gi
 
-# kubectl apply -f psql-claim.yaml
+# kubectl apply -f postgres-pvc.yaml
 
 # kubectl get pv
 

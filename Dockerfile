@@ -6,7 +6,7 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY .. .
 
 ENTRYPOINT gunicorn --bind 0.0.0.0:8080 siteSetup.wsgi
 

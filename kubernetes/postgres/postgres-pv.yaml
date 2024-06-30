@@ -10,12 +10,12 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 10gi
+    storage: 10Gi
   accessModes:
     - ReadWriteMany
   hostPath:
     path: /data/postgresql
 
-# kubectl apply -f psql-pv.yaml
+# kubectl apply -f postgres-pv.yaml
 
 #
