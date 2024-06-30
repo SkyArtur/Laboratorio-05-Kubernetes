@@ -1,0 +1,16 @@
+# 1º
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: "laboratorio"
+  POSTGRES_USER: "estudante"
+  POSTGRES_PASSWORD: "212223"
+
+# kubectl apply -f postgres-configmap.yaml
+
+# kubectl get configmap
