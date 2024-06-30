@@ -29,7 +29,7 @@ Em um diretório raiz nomeado como *app_django* executar os comandos a seguir:
 
     > Linux - `` python3 manage.py startapp siteApp ``
 
-### Trabalhando a aplicação em *./siteApp*
+## Trabalhando a aplicação em *./siteApp*
 - Editando *models.py*:
 ```python
 from django.db import models
@@ -313,4 +313,234 @@ urlpatterns = [
 @import "_table.css";
 @import "_form.css";
 ```
+### Criando arquivo javascript em *./siteApp/static/js/*
+- Criando e editando *main.js*
+O arquivo em questão será utilizado para programar os links da aplicação.
+```javascript
+(
+    function () {
+        let appLink = document.querySelectorAll('[app-link]')
+        if (appLink) {
+            appLink.forEach(link => {
+                const [url, target] = link.getAttribute('app-link').split(' ')
+                const location = window.location.pathname
+                link.addEventListener('click', () => {
+                    window.open(url, target ?? '_self')
+                })
+                if (location === url) link.style = 'background-color: var(--color-dark); color: white;'
+            })
+        }
+    }
+)()
+```
+## Trabalhando a aplicação em *./siteSetup*
+- Editando as configurações padrões do arquivo *settings.py*.
+  - INSTALLED APPS 
+  ```python
+  INSTALLED_APPS = [
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+      'siteApp'
+  ]
+  ```
+  - TEMPLATES
+  ```python
+  TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+  ]
+  ```
+  - DATABASES
+  ```python
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': 'laboratorio',
+          'USER': 'estudante',
+          'PASSWORD': '212223',
+          'HOST': 'postgres',
+          'PORT': 5432,
+      }
+  }
+  ```
+  - LANGUAGE E STATICS
+  ```python
+  LANGUAGE_CODE = 'pt-br'
+  
+  TIME_ZONE = 'America/Sao_Paulo'
+  
+  USE_I18N = True
+  
+  USE_TZ = True
+  
+  
+  # Static files (CSS, JavaScript, Images)
+  # https://docs.djangoproject.com/en/5.0/howto/static-files/
+  
+  STATIC_URL = 'static/'
+  
+  STATIC_ROOT = BASE_DIR / 'staticfiles'
+  
+  STATICFILES_DIRS = [BASE_DIR / 'siteApp/static']
+  ```
+- editando arquivo *urls.py*
+```python
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls.static import static, settings
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include(('siteApp.urls', 'siteApp'), namespace='app'))
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+```
+## Trabalhando a aplicação em *./templates*
+
+Após a criação do diretório *templates*, criar dentro do mesmo os diretórios *includes* e *content* e o arquivo *index.html*.
+- criando e editando o arquivo *includes/_header.html*
+```html
+<header app-header>
+    <h1>Aplicação de teste</h1>
+    <p>Testando o deploy de uma aplicação Django com Kubernetes</p>
+</header>
+```
+- criando e editando o arquivo *includes/_menu.html*
+```html
+<aside app-menu>
+    <nav app-nav>
+        <div app-link="{% url 'app:home' %}">Home</div>
+        <div app-link="{% url 'app:add' %}">Cadastrar</div>
+    </nav>
+</aside>
+```
+- criando e editando o arquivo *includes/_footer.html*
+```html
+<footer app-footer>
+    <small app-link="https://github.com/SkyArtur _blank">SkyArtur/Development</small>
+</footer>
+```
+- criando e editando o arquivo *content/home.html*
+```html
+{% extends 'index.html' %}
+
+{% block title %}HOME{% endblock %}
+
+{% block content %}
+    <table app-table>
+        <thead>
+            <tr>
+                <th>NOME</th>
+                <th>SOBRENOME</th>
+                <th>NASCIMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.sobrenome }}</td>
+                <td>{{ pessoa.nascimento|date:'d/m/Y' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+```
+- criando e editando o arquivo *content/add.html*
+```html
+{% extends 'index.html' %}
+
+{% block title %}CADASTRAR{% endblock %}
+
+{% block content %}
+	<div app-form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="app-form-control">
+                <label>NOME</label>
+                {{ form.nome }}
+            </div>
+            <div class="app-form-control">
+                <label>SOBRENOME</label>
+                {{ form.sobrenome }}
+            </div>
+            <div class="app-form-control">
+                <label>NASCIMENTO</label>
+                {{ form.nascimento }}
+            </div>
+            <div class="app-form-submit">
+                <input type="submit" formaction="{% url 'app:add' %}">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+```
+- criando e editando o arquivo *index.html*
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body app-body>
+    {% include 'includes/_header.html' %}
+    <div app-container>
+        {% include 'includes/_menu.html' %}
+        <div app-content>
+            {% block content %}{% endblock %}
+        </div>
+        {% include 'includes/_footer.html' %}
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+```
+# Conclusão
+
+Agora que a aplicação está concluída, ela pode ser testada. Como o banco de dados para a aplicação já foi definido, para 
+realizar os testes podemos editar a constante ***DATABASES*** para a utilização de um banco de dados sqlite:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite',
+    }
+}
+```
+
+Realizar as migrações
+> ``python manage.py makemigrations``
+
+> ``python manage.py migrate``
+
+> ``python manage.py collectstatic``
+
+Executar a aplicação:
+> ``python manage.py runserver``
+
+
+Para terminar vamos criar o arquivo requirements.txt com o comando:
+> ``pip freeze >> requirements.txt``

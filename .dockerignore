@@ -9,3 +9,13 @@ docker
 .gitignore
 
 kubernetes
+
+db.sqlite
+
+staticfiles
+
+LICENSE.md
+
+README.md
+
+readme
