@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+  labels:
+    app: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - image: skyartur/app_django_teste:v1
+          name: django
+          ports:
+            - containerPort: 8080
+              name: gunicorn
+
+# kubectl apply -f django-deployment.yaml
+
+# kubectl get deploy django-app

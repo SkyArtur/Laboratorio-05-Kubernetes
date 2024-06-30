@@ -30,7 +30,7 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-volume-claim
 
-# kubectl apply -f ps-deployment.yaml
+# kubectl apply -f postgres-deployment.yaml
 
 # kubectl get deployments
 

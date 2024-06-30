@@ -12,7 +12,7 @@ spec:
   selector:
     app: postgres
 
-# kubectl apply -f ps-service.yaml
+# kubectl apply -f postgres-service.yaml
 
 # kubectl get svc
 
