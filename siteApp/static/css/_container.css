@@ -1,0 +1,13 @@
+[app-container] {
+    grid-area: container;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1366px;
+    min-width: 350px;
+    max-height: calc(100vh - 65px);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 1fr 40px;
+    grid-template-areas: 'menu' 'content' 'footer';
+}

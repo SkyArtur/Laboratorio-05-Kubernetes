@@ -1,0 +1,19 @@
+[app-table] {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 35px;
+}
+
+[app-table] thead {
+    background-color: var(--color-dark);
+    color: white;
+}
+
+[app-table] > tbody tr:nth-of-type(even) {
+    background-color: aliceblue;
+}
+
+[app-table] tr > td:first-child {
+    font-weight: bold;
+}

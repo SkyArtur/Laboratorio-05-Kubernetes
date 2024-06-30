@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}
+	HOME
+{% endblock %}
+
+{% block content %}
+
+    <table app-table>
+        <thead>
+            <tr>
+                <th>NOME</th>
+                <th>SOBRENOME</th>
+                <th>NASCIMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.sobrenome }}</td>
+                <td>{{ pessoa.nascimento|date:'d/m/Y' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

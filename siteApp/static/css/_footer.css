@@ -1,0 +1,6 @@
+[app-footer] {
+    padding-right: 15px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}

@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block title %}
+	CADASTRAR
+{% endblock %}
+
+{% block content %}
+	<div app-form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="app-form-control">
+                <label>NOME</label>
+                {{ form.nome }}
+            </div>
+            <div class="app-form-control">
+                <label>SOBRENOME</label>
+                {{ form.sobrenome }}
+            </div>
+            <div class="app-form-control">
+                <label>NASCIMENTO</label>
+                {{ form.nascimento }}
+            </div>
+            <div class="app-form-submit">
+                <input type="submit" formaction="{% url 'app:add' %}">
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+@import "_root.css";
+@import "_link.css";
+@import "_body.css";
+@import "_header.css";
+@import "_container.css";
+@import "_menu.css";
+@import "_footer.css";
+@import "_content.css";
+@import "_table.css";
+
+[app-form] {
+    border: var(--border);
+    border-radius: 5px;
+    height: 430px;
+}
+[app-form] form {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 100px);
+}
+
+.app-form-control {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.app-form-control input {
+    height: 40px;
+    font-size: 20px;
+    border: var(--border);
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+[app-form] .app-form-control:nth-child(4) {
+    width: 350px;
+}
+
+.app-form-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-form-submit input {
+    height: 50px;
+    width: 250px;
+    border: var(--border);
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 1rem;
+    box-shadow: var(--shadow-out);
+}
+.app-form-submit input:hover {
+    font-size: 1.2rem;
+}
+
+.app-form-submit input:active {
+    box-shadow: none;
+}
