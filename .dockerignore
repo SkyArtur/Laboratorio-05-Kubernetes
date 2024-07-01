@@ -4,18 +4,14 @@ venv
 
 __pycache__
 
-docker
-
-.gitignore
+readme
 
 kubernetes
 
-db.sqlite
+.gitignore
 
-staticfiles
+db.sqlite
 
 LICENSE.md
 
 README.md
-
-readme

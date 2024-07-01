@@ -520,6 +520,11 @@ Após a criação do diretório *templates*, criar dentro do mesmo os diretório
 ```
 # Conclusão
 
+Para concluir vamos realizar a coleta dos arquivos estáticos e criar o arquivo requirements.txt com os comandos:
+> ``python manage.py collectstatic``
+
+> ``pip freeze >> requirements.txt``
+
 Agora que a aplicação está concluída, ela pode ser testada. Como o banco de dados para a aplicação já foi definido, para 
 realizar os testes podemos editar a constante ***DATABASES*** para a utilização de um banco de dados sqlite:
 ```python
@@ -536,11 +541,5 @@ Realizar as migrações
 
 > ``python manage.py migrate``
 
-> ``python manage.py collectstatic``
-
 Executar a aplicação:
 > ``python manage.py runserver``
-
-
-Para terminar vamos criar o arquivo requirements.txt com o comando:
-> ``pip freeze >> requirements.txt``

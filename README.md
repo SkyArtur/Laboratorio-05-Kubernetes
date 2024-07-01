@@ -200,7 +200,58 @@ spec:
 ```
 
 Executando o arquivo:
-> ``kubectl apply -f postgres-servide.yaml``
+> ``kubectl apply -f postgres-service.yaml``
 
 ### Serviço da aplicação Django
+
+- #### 1. Definindo o arquivo *django-deployment.yaml*:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+  labels:
+    app: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - image: usuario/app_django:v1 # utilizando a imagem do repositório
+          name: django
+          ports:
+            - containerPort: 8080
+              name: gunicorn
+```
+
+Executando o arquivo:
+> ``kubectl apply -f django-deployment.yaml``
+
+- #### 2. Definindo o arquivo *django-service.yaml*:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  type: NodePort
+  selector:
+    app: django
+  ports:
+    - port: 8080
+      targetPort: 8080
+```
+
+Executando o arquivo:
+> ``kubectl apply -f django-service.yaml``
+
+## Pós-configuração
 
