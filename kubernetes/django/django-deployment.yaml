@@ -15,7 +15,7 @@ spec:
         app: django
     spec:
       containers:
-        - image: skyartur/app_django_teste:v1
+        - image: skyartur/app_django:v1
           name: django
           ports:
             - containerPort: 8080
