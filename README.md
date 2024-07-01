@@ -253,5 +253,45 @@ spec:
 Executando o arquivo:
 > ``kubectl apply -f django-service.yaml``
 
-## Pós-configuração
+## Pós-definições
 
+Após as execuções acima, precisaremos realizar algumas configurações finais. Vamos verificar os pods que temos disponíveis:
+
+> ``kubectl get pods``
+
+Teremos a seguinte saída. Lembrando que pode demorar alguns segundos até que ambas as aplicações apresentem o status **Running**:
+```shell
+usuario@desktop:~/GitHub/app_django$ kubectl get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+django-app-5ddcd598fb-6bd2f   1/1     Running   0          77s
+postgres-7668c5f476-w7nst     1/1     Running   0          2m18s
+```
+
+Precisaremos realizar as migrações, por isso vamos executar o comando a seguir para acessarmos o nosso container:
+
+> ``kubectl exec -it django-app-5ddcd598fb-6bd2f -- bash``
+
+Em seguida vamos executar os comandos para migração no banco de dados:
+
+``` shell 
+  root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py makemigrations
+```
+
+``` shell 
+  root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py migrate
+```
+
+``` shell 
+  root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py createsuperuser
+```
+
+Para sair do terminal do container precione *ctrl+d*. Se tudo estiver correto teremos as migrações no nosso banco de dados e poderemos acessar nossa aplicação. Para saber o ip da nossa aplicação, vamos digitar o comando:
+
+```shell
+skyartur@ub-desktop:~/GitHub/app_django/kubernetes/django$ minikube service django --url
+```
+
+Saída:
+```shell
+http://192.168.49.2:31405
+```
