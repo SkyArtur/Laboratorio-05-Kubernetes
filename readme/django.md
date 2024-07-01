@@ -526,7 +526,8 @@ Para concluir vamos realizar a coleta dos arquivos estáticos e criar o arquivo 
 > ``pip freeze >> requirements.txt``
 
 Agora que a aplicação está concluída, ela pode ser testada. Como o banco de dados para a aplicação já foi definido, para 
-realizar os testes podemos editar a constante ***DATABASES*** para a utilização de um banco de dados sqlite:
+realizar os testes podemos editar a constante ***DATABASES*** para a utilização de um banco de dados sqlite, mas
+lembre-se de retornar a configuração anterior antes de criar a imagem da aplicação:
 ```python
 DATABASES = {
     'default': {
