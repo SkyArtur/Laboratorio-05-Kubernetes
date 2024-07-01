@@ -255,11 +255,10 @@ Executando o arquivo:
 
 ## Pós-definições
 
-Após as execuções acima, precisaremos realizar algumas configurações finais. Vamos verificar os pods que temos disponíveis:
-
+- Verificar o status dos pods:
 > ``kubectl get pods``
 
-Teremos a seguinte saída. Lembrando que pode demorar alguns segundos até que ambas as aplicações apresentem o status **Running**:
+Pode demorar alguns segundos até que ambas as aplicações apresentem o status **Running**:
 ```shell
 usuario@desktop:~/GitHub/app_django$ kubectl get pods
 NAME                          READY   STATUS    RESTARTS   AGE
@@ -267,31 +266,23 @@ django-app-5ddcd598fb-6bd2f   1/1     Running   0          77s
 postgres-7668c5f476-w7nst     1/1     Running   0          2m18s
 ```
 
-Precisaremos realizar as migrações, por isso vamos executar o comando a seguir para acessarmos o nosso container:
-
+- Acessando o container da aplicação:
 > ``kubectl exec -it django-app-5ddcd598fb-6bd2f -- bash``
 
-Em seguida vamos executar os comandos para migração no banco de dados:
-
+- Configurando o banco de dados para a aplicação a partir do prompt de comando do container:
 ``` shell 
-  root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py makemigrations
+ root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py makemigrations
 ```
-
 ``` shell 
-  root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py migrate
+ root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py migrate
 ```
-
 ``` shell 
   root@django-app-5ddcd598fb-6bd2f:/usr/src/app# python manage.py createsuperuser
 ```
 
-Para sair do terminal do container precione *ctrl+d*. Se tudo estiver correto teremos as migrações no nosso banco de dados e poderemos acessar nossa aplicação. Para saber o ip da nossa aplicação, vamos digitar o comando:
+Para sair do terminal do container pressione *ctrl+d*. Se tudo estiver correto teremos as migrações no nosso banco de 
+dados e poderemos acessar nossa aplicação. 
+- Verificando o ip da aplicação:
+> ``minikube service django --url``
 
-```shell
-skyartur@ub-desktop:~/GitHub/app_django/kubernetes/django$ minikube service django --url
-```
-
-Saída:
-```shell
-http://192.168.49.2:31405
-```
+Acesse a url apresentada na saída do terminal.
