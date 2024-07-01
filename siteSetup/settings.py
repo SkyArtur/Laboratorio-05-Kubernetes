@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'siteSetup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'laboratorio',
+        'USER': 'estudante',
+        'PASSWORD': '212223',
+        'HOST': 'postgres',
+        'PORT': 5432,
     }
 }
 
