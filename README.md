@@ -1,4 +1,4 @@
-# Sobre a atividade 
+# Laboratorio 05 - Gerenciando uma aplicação com Kubernets
 
 Esta atividade é parte do meu roteiro pessoal na formação em Engenharia de Software. Trata-se de uma experiência simples
 em orquestração de containers utilizando Kubernetes. Não possui caráter profissional e seu objetivo é unicamente o de ser
