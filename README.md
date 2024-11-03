@@ -286,3 +286,17 @@ dados e poderemos acessar nossa aplicação.
 > ``minikube service django --url``
 
 Acesse a url apresentada na saída do terminal.
+
+<hr/>
+
+Laboratórios:
+
+[Laboratório 01 - Trabalhando com PostgreSQL e PL/pgSQL.](https://github.com/SkyArtur/Laboratorio-01-PLpgSQL)
+
+[Laboratório 02 - Conectando com o banco de dados.](https://github.com/SkyArtur/Laboratorio-02-Python)
+
+[Laboratório 03 - Conectando com o banco de dados com Node JS.](https://github.com/SkyArtur/Laboratorio-03-Node)
+
+[Laboratório 04 - Criando uma API com express JS.](https://github.com/SkyArtur/Laboratorio-04-Node-Express)
+
+<hr/>
